@@ -1,0 +1,10 @@
+| Relationship            | Type                      | How it's implemented                                                                                                                       |
+| ----------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Doctor ↔ DoctorProfile  | One-to-One                | `DoctorProfiles.doctor_id` is `PRIMARY KEY` and `FOREIGN KEY` referencing `Doctors.doctor_id`. Only one profile per doctor.                |
+| Doctors ↔ Clinics       | Many-to-Many              | Through `DoctorClinic` junction table with composite primary key `(doctor_id, clinic_id)`, plus extra attributes (start\_date, end\_date). |
+| Patients ↔ Appointments | One-to-Many               | Each appointment references one patient; a patient can have many appointments.                                                             |
+| Doctors ↔ Appointments  | One-to-Many               | Each appointment references one doctor; doctors have many appointments.                                                                    |
+| Clinics ↔ Appointments  | One-to-Many               | Similarly for clinic.                                                                                                                      |
+| Appointments ↔ Services | Many-to-Many              | Via `AppointmentServices`, composite key (appointment\_id, service\_id).                                                                   |
+| Appointment ↔ Bill      | One-to-One                | Bill having `appointment_id` unique ensures one bill per appointment.                                                                      |
+| Users ↔ Roles           | Many-to-One / One-to-Many | Each user has one role; a role used by many users.                                                                                         |
